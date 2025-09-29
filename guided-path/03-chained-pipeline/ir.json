@@ -1,0 +1,197 @@
+{
+  "target": "division:divide",
+  "cases": [
+    {
+      "id": "divide_by_zero",
+      "call": {
+        "args": [10, 0]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["ZeroDivisionError"]
+        }
+      }
+    },
+    {
+      "id": "divide_by_zero_negative",
+      "call": {
+        "args": [-5, 0]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["ZeroDivisionError"]
+        }
+      }
+    },
+    {
+      "id": "divide_by_zero_float",
+      "call": {
+        "args": [3.5, 0.0]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["ZeroDivisionError"]
+        }
+      }
+    },
+    {
+      "id": "type_error_string_numerator",
+      "call": {
+        "args": ["10", 2]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["TypeError"]
+        }
+      }
+    },
+    {
+      "id": "type_error_string_denominator",
+      "call": {
+        "args": [10, "2"]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["TypeError"]
+        }
+      }
+    },
+    {
+      "id": "type_error_none_numerator",
+      "call": {
+        "args": [null, 5]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["TypeError"]
+        }
+      }
+    },
+    {
+      "id": "type_error_none_denominator",
+      "call": {
+        "args": [10, null]
+      },
+      "expectation": {
+        "raises": {
+          "types": ["TypeError"]
+        }
+      }
+    },
+    {
+      "id": "infinity_numerator",
+      "call": {
+        "args": ["float('inf')", 2]
+      },
+      "expectation": {
+        "predicate": {
+          "name": "math.isinf"
+        }
+      }
+    },
+    {
+      "id": "infinity_denominator",
+      "call": {
+        "args": [10, "float('inf')"]
+      },
+      "expectation": {
+        "equals": {
+          "value": 0.0,
+          "tolerance": 1e-10
+        }
+      }
+    },
+    {
+      "id": "negative_infinity_numerator",
+      "call": {
+        "args": ["float('-inf')", 2]
+      },
+      "expectation": {
+        "predicate": {
+          "name": "math.isinf"
+        }
+      }
+    },
+    {
+      "id": "nan_numerator",
+      "call": {
+        "args": ["float('nan')", 2]
+      },
+      "expectation": {
+        "predicate": {
+          "name": "math.isnan"
+        }
+      }
+    },
+    {
+      "id": "nan_denominator",
+      "call": {
+        "args": [10, "float('nan')"]
+      },
+      "expectation": {
+        "predicate": {
+          "name": "math.isnan"
+        }
+      }
+    },
+    {
+      "id": "infinity_by_infinity",
+      "call": {
+        "args": ["float('inf')", "float('inf')"]
+      },
+      "expectation": {
+        "predicate": {
+          "name": "math.isnan"
+        }
+      }
+    },
+    {
+      "id": "positive_division",
+      "call": {
+        "args": [10, 2]
+      },
+      "expectation": {
+        "equals": {
+          "value": 5.0,
+          "tolerance": 1e-10
+        }
+      }
+    },
+    {
+      "id": "negative_division",
+      "call": {
+        "args": [-10, 2]
+      },
+      "expectation": {
+        "equals": {
+          "value": -5.0,
+          "tolerance": 1e-10
+        }
+      }
+    },
+    {
+      "id": "float_division",
+      "call": {
+        "args": [7.5, 2.5]
+      },
+      "expectation": {
+        "equals": {
+          "value": 3.0,
+          "tolerance": 1e-10
+        }
+      }
+    },
+    {
+      "id": "integer_result_from_floats",
+      "call": {
+        "args": [10.0, 5.0]
+      },
+      "expectation": {
+        "equals": {
+          "value": 2.0,
+          "tolerance": 1e-10
+        }
+      }
+    }
+  ]
+}

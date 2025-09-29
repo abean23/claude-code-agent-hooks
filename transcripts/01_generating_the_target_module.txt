@@ -1,0 +1,47 @@
+╭────────────────────────────────────────────────────────────────────────────╮
+│ ✻ Welcome to Claude Code!                                                  │
+│                                                                            │
+│   /help for help, /status for your current setup                           │
+│                                                                            │
+│   cwd: C:\Users\Austin\Desktop\Anthropic Prep\claude code agent and hooks  │
+╰────────────────────────────────────────────────────────────────────────────╯
+
+> You are an expert Python developer specializing in writing clean, well-documented, and testable code. I am building an AI agent that programmatically generates pytest test suites 
+for Python modules. Your task is to create the content for a Python module named src/string_utils.py that my agent will analyze. Please adhere to the following requirements: Include 
+at least two functions: is_palindrome(s: str) -> bool: This function should check if a given string is a palindrome. find_longest_word(sentence: str) -> str | None: This function 
+should find and return the longest word in a sentence. If the sentence is empty, it should return None. Code Quality: The code must include proper type hints and clear, concise 
+docstrings for each function explaining what it does. Introduce Complexity & Edge Cases: Design these functions to have non-obvious edge cases that a good test suite would need to 
+cover. Specifically, consider: For is_palindrome: How should it handle case sensitivity (e.g., "Racecar" vs. "racecar")? What about punctuation and spaces (e.g., "A man, a plan, a 
+canal: Panama")? What about an empty string? For find_longest_word: How should it handle a sentence with multiple words of the same maximum length? What about sentences with 
+punctuation attached to words?
+
+● I'll create the src/string_utils.py module with two functions that have interesting edge cases for testing.
+
+● Bash(ls src)
+  ⎿  (No content)
+
+● Write(src\string_utils.py)
+  ⎿  Wrote 1 lines to src\string_utils.py                                    
+     import re
+     def is_palindrome(s: str) -> bool:
+         """
+         Check if a given string is a palindrome.
+         A palindrome is a string that reads the same forwards and backwards.
+         This function ignores case, spaces, and punctuation when checking.
+
+● Created src/string_utils.py with both functions:
+
+  is_palindrome(s: str) -> bool
+  - Normalizes to lowercase and removes all non-alphanumeric characters
+  - Edge cases: empty strings (returns True), mixed case, punctuation/spaces
+
+  find_longest_word(sentence: str) -> str | None
+  - Extracts words using regex \b[a-zA-Z0-9]+\b to handle punctuation
+  - Returns first occurrence when multiple words have the same max length
+  - Edge cases: empty/whitespace-only sentences (returns None), punctuation-only input
+
+  Both functions include type hints, comprehensive docstrings with examples, and handle the edge cases you specified.
+
+
+
+
