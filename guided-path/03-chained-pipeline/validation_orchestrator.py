@@ -65,11 +65,15 @@ def main():
     parser.add_argument("--out", dest="out_path", required=True)
     parser.add_argument("--report", dest="report_path", required=True)
     parser.add_argument("--run", action="store_true")
+    parser.add_argument("--format", action="store_true", help="Format generated tests with black")
     args = parser.parse_args()
 
     ir = json.loads(Path(args.in_path).read_text())
     target = ir.get("target", "division:divide")
     cases = ir.get("cases", [])
+
+    # Sort cases deterministically by id for stable test discovery
+    cases = sorted(cases, key=lambda c: c.get("id", ""))
 
     if not cases:
         return
@@ -88,7 +92,21 @@ def isinstance_complex(value):
 """
     ]
     tests.extend(generate_test(i, target, case) for i, case in enumerate(cases))
-    Path(args.out_path).write_text("\n".join(tests))
+    test_content = "\n".join(tests)
+    Path(args.out_path).write_text(test_content)
+
+    # Format with black if requested
+    if args.format:
+        try:
+            result = subprocess.run(
+                [sys.executable, "-m", "black", "--quiet", args.out_path],
+                capture_output=True,
+                timeout=10
+            )
+            if result.returncode == 0:
+                print(f"✓ Formatted {args.out_path} with black")
+        except (subprocess.TimeoutExpired, FileNotFoundError):
+            pass  # black not available or timed out
 
     result = {"target": target, "counts": {"total": len(cases), "passed": 0, "failed": 0}, "cases": []}
     if args.run:

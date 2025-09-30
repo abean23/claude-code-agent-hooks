@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-09-30T04:54:22.468566Z",
+  "git": {
+    "commit": "ce77d669045e7351d598759cb51bb05e990b2b81",
+    "branch": "main",
+    "dirty": true
+  },
+  "versions": {
+    "python": "Python 3.12.3",
+    "pytest": "7.4.4",
+    "jsonschema": "4.10.3",
+    "black": null
+  },
+  "environment": {
+    "python_executable": "/usr/bin/python3",
+    "platform": "linux"
+  },
+  "files": {
+    "ir_json": "0d7303613f96fd1026d67bcb509d9d7e9d78bc13ccbd42a7910de7c1a2d4c817",
+    "division_py": "a677aff82aa3727b427acb3556096ee794749662f7e9b58471daf95f00d7d1ed",
+    "generated_tests_py": "be75cf9c1c93c458a246f522a871f1a15253d9d0f595ade17e109f31de9bb079",
+    "ir_schema_json": "64073372b2304a1a0d3f4f8065a3c5799f76dad004c0c89fa38ff57d071da6d6"
+  },
+  "config": {
+    "random_seed": null,
+    "model_name": "claude-sonnet-4-5-20250929"
+  },
+  "traceability": {
+    "agent_used": "EdgeCaseAgent",
+    "agent_config": "/home/austin/claude-code-agent-hooks/guided-path/03-chained-pipeline/.claude/agents/edge_case_agent.md",
+    "prompt_summary": "Analyze code for edge cases and generate structured IR",
+    "note": "Full agent prompt available in agent_config file"
+  }
+}

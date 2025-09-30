@@ -38,16 +38,28 @@ fi
 
 orch_path="$CLAUDE_PROJECT_DIR/validation_orchestrator.py"
 out_file="$CLAUDE_PROJECT_DIR/generated_tests.py"
-report_file="$CLAUDE_PROJECT_DIR/report.json"
+report_file="$CLAUDE_PROJECT_DIR/reports/pytest.json"
 
 # In-memory loop prevention: track correction attempts within this execution
 correction_attempted=false
 max_correction_attempts=1
 
 log "Running orchestrator: $orch_path"
-python3 "$orch_path" --in "$ir_file" --out "$out_file" --report "$report_file" --run 2>> "$LOG_FILE" || {
+python3 "$orch_path" --in "$ir_file" --out "$out_file" --report "$report_file" --run --format 2>> "$LOG_FILE" || {
   log "Orchestrator failed"
   exit 1
+}
+
+# Generate run manifest for reproducibility
+log "Generating run manifest"
+python3 "$CLAUDE_PROJECT_DIR/manifest_generator.py" "$CLAUDE_PROJECT_DIR" "$CLAUDE_PROJECT_DIR/reports/run.meta.json" >> "$LOG_FILE" 2>&1 || {
+  log "Warning: Manifest generation failed"
+}
+
+# Generate human-readable summary
+log "Generating test summary"
+python3 "$CLAUDE_PROJECT_DIR/summary_generator.py" "$report_file" "$ir_file" "$CLAUDE_PROJECT_DIR/reports/summary.md" >> "$LOG_FILE" 2>&1 || {
+  log "Warning: Summary generation failed"
 }
 
 # Check for test failures in report
