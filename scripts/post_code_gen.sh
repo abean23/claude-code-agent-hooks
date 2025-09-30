@@ -5,14 +5,11 @@
 # Explanation: After Claude response, runs orchestrator to generate/run tests.
 #              If tests fail, attempts to correct IR once (state tracked in memory).
 
-LOG_FILE="$CLAUDE_PROJECT_DIR/hook_log.txt"
+LOG_FILE="$CLAUDE_PROJECT_DIR/outputs/hook_log.txt"
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"; }
-
-PROJECT_ROOT="/home/austin/claude-code-agent-hooks/guided-path/03-chained-pipeline/"
-CLAUDE_PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$PROJECT_ROOT}"
 log "Stop Hook Triggered: $CLAUDE_PROJECT_DIR"
 
-ir_file="$CLAUDE_PROJECT_DIR/ir.json"
+ir_file="$CLAUDE_PROJECT_DIR/outputs/ir.json"
 if [ ! -s "$ir_file" ]; then
   log "No IR—skipping"
   exit 0
@@ -26,19 +23,19 @@ log "PYTHONPATH: $PYTHONPATH"
 log "Pre-validating IR JSON syntax"
 target=$(jq -r '.target' "$ir_file" 2>/dev/null | cut -d':' -f1)
 if [ -z "$target" ]; then
-  target="division"  # fallback
+  target="examples.division"  # fallback
 fi
 
-if python3 "$CLAUDE_PROJECT_DIR/IRProcessor.py" "$ir_file" "$target" >> "$LOG_FILE" 2>&1; then
+if python3 "$CLAUDE_PROJECT_DIR/pipeline/IRProcessor.py" "$ir_file" "$target" >> "$LOG_FILE" 2>&1; then
   log "IR JSON syntax validated successfully"
 else
   log "IR JSON syntax validation/correction failed"
   exit 1
 fi
 
-orch_path="$CLAUDE_PROJECT_DIR/validation_orchestrator.py"
-out_file="$CLAUDE_PROJECT_DIR/generated_tests.py"
-report_file="$CLAUDE_PROJECT_DIR/reports/pytest.json"
+orch_path="$CLAUDE_PROJECT_DIR/pipeline/validation_orchestrator.py"
+out_file="$CLAUDE_PROJECT_DIR/outputs/generated_tests.py"
+report_file="$CLAUDE_PROJECT_DIR/outputs/reports/pytest.json"
 
 # In-memory loop prevention: track correction attempts within this execution
 correction_attempted=false
@@ -52,13 +49,13 @@ python3 "$orch_path" --in "$ir_file" --out "$out_file" --report "$report_file" -
 
 # Generate run manifest for reproducibility
 log "Generating run manifest"
-python3 "$CLAUDE_PROJECT_DIR/manifest_generator.py" "$CLAUDE_PROJECT_DIR" "$CLAUDE_PROJECT_DIR/reports/run.meta.json" >> "$LOG_FILE" 2>&1 || {
+python3 "$CLAUDE_PROJECT_DIR/pipeline/manifest_generator.py" "$CLAUDE_PROJECT_DIR" "$CLAUDE_PROJECT_DIR/outputs/reports/run.meta.json" >> "$LOG_FILE" 2>&1 || {
   log "Warning: Manifest generation failed"
 }
 
 # Generate human-readable summary
 log "Generating test summary"
-python3 "$CLAUDE_PROJECT_DIR/summary_generator.py" "$report_file" "$ir_file" "$CLAUDE_PROJECT_DIR/reports/summary.md" >> "$LOG_FILE" 2>&1 || {
+python3 "$CLAUDE_PROJECT_DIR/pipeline/summary_generator.py" "$report_file" "$ir_file" "$CLAUDE_PROJECT_DIR/outputs/reports/summary.md" >> "$LOG_FILE" 2>&1 || {
   log "Warning: Summary generation failed"
 }
 
@@ -74,7 +71,7 @@ if [ -f "$report_file" ]; then
     target=$(jq -r '.target' "$ir_file" | cut -d':' -f1)
 
     # Run IRProcessor corrector
-    if python3 "$CLAUDE_PROJECT_DIR/IRProcessor.py" "$ir_file" "$target" >> "$LOG_FILE" 2>&1; then
+    if python3 "$CLAUDE_PROJECT_DIR/pipeline/IRProcessor.py" "$ir_file" "$target" >> "$LOG_FILE" 2>&1; then
       log "IR corrected successfully"
       correction_attempted=true
 

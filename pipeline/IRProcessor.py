@@ -152,7 +152,7 @@ class IRValidator:
 
         # Validate against JSON schema if available
         if JSONSCHEMA_AVAILABLE:
-            schema_path = ir_path.parent / "ir_schema.json"
+            schema_path = Path(ir_path).parent.parent / "schemas" / "ir_schema.json"
             if schema_path.exists():
                 try:
                     with open(schema_path) as f:

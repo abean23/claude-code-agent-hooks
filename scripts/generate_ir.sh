@@ -5,9 +5,9 @@
 
 set -e
 
-SOURCE_FILE="${1:-division.py}"
-OUTPUT_FILE="${2:-ir.json}"
-LOG_FILE="${3:-hook_log.txt}"
+SOURCE_FILE="${1:-examples/division.py}"
+OUTPUT_FILE="${2:-outputs/ir.json}"
+LOG_FILE="${3:-outputs/hook_log.txt}"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"; }
 
@@ -16,7 +16,7 @@ log "Generating IR from $SOURCE_FILE using EdgeCaseAgent"
 # Create a temporary file for the agent prompt
 PROMPT_FILE=$(mktemp)
 cat > "$PROMPT_FILE" <<'EOF'
-Analyze the divide function in division.py for potential edge cases and generate structured IR for test generation.
+Analyze the divide function in examples/division.py for potential edge cases and generate structured IR for test generation.
 
 CRITICAL INSTRUCTIONS:
 - Return ONLY raw JSON, NO markdown code blocks, NO explanations

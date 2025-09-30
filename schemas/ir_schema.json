@@ -5,8 +5,8 @@
   "properties": {
     "target": {
       "type": "string",
-      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
-      "description": "Target function in format 'module:function'"
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_.]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "description": "Target function in format 'module:function' (module can include dots for packages)"
     },
     "cases": {
       "type": "array",

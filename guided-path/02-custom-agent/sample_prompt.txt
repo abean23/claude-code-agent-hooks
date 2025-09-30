@@ -1,1 +1,0 @@
-Generate a Python function to divide two numbers, then analyze it for edge cases using the EdgeCaseAgent. Return just the JSON output from the EdgeCaseAgent.

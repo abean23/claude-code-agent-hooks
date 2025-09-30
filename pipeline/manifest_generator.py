@@ -100,10 +100,10 @@ def generate_manifest(project_dir: Path, output_path: Path):
             "platform": sys.platform
         },
         "files": {
-            "ir_json": compute_file_checksum(project_dir / "ir.json"),
-            "division_py": compute_file_checksum(project_dir / "division.py"),
-            "generated_tests_py": compute_file_checksum(project_dir / "generated_tests.py"),
-            "ir_schema_json": compute_file_checksum(project_dir / "ir_schema.json")
+            "ir_json": compute_file_checksum(project_dir / "outputs" / "ir.json"),
+            "division_py": compute_file_checksum(project_dir / "examples" / "division.py"),
+            "generated_tests_py": compute_file_checksum(project_dir / "outputs" / "generated_tests.py"),
+            "ir_schema_json": compute_file_checksum(project_dir / "schemas" / "ir_schema.json")
         },
         "config": {
             "random_seed": None,  # Placeholder for future use

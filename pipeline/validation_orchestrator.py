@@ -111,7 +111,7 @@ def isinstance_complex(value):
     result = {"target": target, "counts": {"total": len(cases), "passed": 0, "failed": 0}, "cases": []}
     if args.run:
         proc = subprocess.run(
-            [sys.executable, "-m", "pytest", args.out_path, "-v", "--cov=division", "--disable-warnings"],
+            [sys.executable, "-m", "pytest", args.out_path, "-v", "--cov=examples.division", "--disable-warnings"],
             text=True, capture_output=True
         )
         result["stdout"] = proc.stdout
