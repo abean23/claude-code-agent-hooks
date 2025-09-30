@@ -1,8 +1,8 @@
 {
   "target": "division:divide",
   "counts": {
-    "total": 17,
-    "passed": 17,
+    "total": 18,
+    "passed": 18,
     "failed": 0
   },
   "cases": [
@@ -11,70 +11,74 @@
       "passed": true
     },
     {
-      "id": "divide_by_zero_negative",
+      "id": "divide_zero_by_zero",
       "passed": true
     },
     {
-      "id": "divide_by_zero_float",
+      "id": "divide_positive_infinity_by_zero",
       "passed": true
     },
     {
-      "id": "type_error_string_numerator",
+      "id": "divide_negative_infinity_by_zero",
       "passed": true
     },
     {
-      "id": "type_error_string_denominator",
+      "id": "divide_by_infinity",
       "passed": true
     },
     {
-      "id": "type_error_none_numerator",
+      "id": "divide_by_negative_infinity",
       "passed": true
     },
     {
-      "id": "type_error_none_denominator",
+      "id": "divide_infinity_by_positive",
       "passed": true
     },
     {
-      "id": "infinity_numerator",
+      "id": "divide_negative_infinity_by_positive",
       "passed": true
     },
     {
-      "id": "infinity_denominator",
+      "id": "divide_infinity_by_infinity",
       "passed": true
     },
     {
-      "id": "negative_infinity_numerator",
+      "id": "divide_infinity_by_negative_infinity",
       "passed": true
     },
     {
-      "id": "nan_numerator",
+      "id": "divide_nan_by_number",
       "passed": true
     },
     {
-      "id": "nan_denominator",
+      "id": "divide_number_by_nan",
       "passed": true
     },
     {
-      "id": "infinity_by_infinity",
+      "id": "divide_nan_by_nan",
       "passed": true
     },
     {
-      "id": "positive_division",
+      "id": "divide_very_small_by_very_large",
       "passed": true
     },
     {
-      "id": "negative_division",
+      "id": "divide_very_large_by_very_small",
       "passed": true
     },
     {
-      "id": "float_division",
+      "id": "divide_negative_by_positive",
       "passed": true
     },
     {
-      "id": "integer_result_from_floats",
+      "id": "divide_positive_by_negative",
+      "passed": true
+    },
+    {
+      "id": "divide_negative_by_negative",
       "passed": true
     }
   ],
-  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0 -- /usr/bin/python3\ncachedir: .pytest_cache\nrootdir: /home/austin/claude-code-agent-hooks/guided-path/03-chained-pipeline\nplugins: cov-4.1.0\ncollecting ... collected 17 items\n\ngenerated_tests.py::test_divide_by_zero PASSED                           [  5%]\ngenerated_tests.py::test_divide_by_zero_negative PASSED                  [ 11%]\ngenerated_tests.py::test_divide_by_zero_float PASSED                     [ 17%]\ngenerated_tests.py::test_type_error_string_numerator PASSED              [ 23%]\ngenerated_tests.py::test_type_error_string_denominator PASSED            [ 29%]\ngenerated_tests.py::test_type_error_none_numerator PASSED                [ 35%]\ngenerated_tests.py::test_type_error_none_denominator PASSED              [ 41%]\ngenerated_tests.py::test_infinity_numerator PASSED                       [ 47%]\ngenerated_tests.py::test_infinity_denominator PASSED                     [ 52%]\ngenerated_tests.py::test_negative_infinity_numerator PASSED              [ 58%]\ngenerated_tests.py::test_nan_numerator PASSED                            [ 64%]\ngenerated_tests.py::test_nan_denominator PASSED                          [ 70%]\ngenerated_tests.py::test_infinity_by_infinity PASSED                     [ 76%]\ngenerated_tests.py::test_positive_division PASSED                        [ 82%]\ngenerated_tests.py::test_negative_division PASSED                        [ 88%]\ngenerated_tests.py::test_float_division PASSED                           [ 94%]\ngenerated_tests.py::test_integer_result_from_floats PASSED               [100%]\n\n---------- coverage: platform linux, python 3.12.3-final-0 -----------\nName          Stmts   Miss  Cover\n---------------------------------\ndivision.py       2      0   100%\n---------------------------------\nTOTAL             2      0   100%\n\n\n============================== 17 passed in 0.03s ==============================\n",
+  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0 -- /usr/bin/python3\ncachedir: .pytest_cache\nrootdir: /home/austin/claude-code-agent-hooks/guided-path/03-chained-pipeline\nplugins: cov-4.1.0\ncollecting ... collected 18 items\n\ngenerated_tests.py::test_divide_by_zero PASSED                           [  5%]\ngenerated_tests.py::test_divide_zero_by_zero PASSED                      [ 11%]\ngenerated_tests.py::test_divide_positive_infinity_by_zero PASSED         [ 16%]\ngenerated_tests.py::test_divide_negative_infinity_by_zero PASSED         [ 22%]\ngenerated_tests.py::test_divide_by_infinity PASSED                       [ 27%]\ngenerated_tests.py::test_divide_by_negative_infinity PASSED              [ 33%]\ngenerated_tests.py::test_divide_infinity_by_positive PASSED              [ 38%]\ngenerated_tests.py::test_divide_negative_infinity_by_positive PASSED     [ 44%]\ngenerated_tests.py::test_divide_infinity_by_infinity PASSED              [ 50%]\ngenerated_tests.py::test_divide_infinity_by_negative_infinity PASSED     [ 55%]\ngenerated_tests.py::test_divide_nan_by_number PASSED                     [ 61%]\ngenerated_tests.py::test_divide_number_by_nan PASSED                     [ 66%]\ngenerated_tests.py::test_divide_nan_by_nan PASSED                        [ 72%]\ngenerated_tests.py::test_divide_very_small_by_very_large PASSED          [ 77%]\ngenerated_tests.py::test_divide_very_large_by_very_small PASSED          [ 83%]\ngenerated_tests.py::test_divide_negative_by_positive PASSED              [ 88%]\ngenerated_tests.py::test_divide_positive_by_negative PASSED              [ 94%]\ngenerated_tests.py::test_divide_negative_by_negative PASSED              [100%]\n\n---------- coverage: platform linux, python 3.12.3-final-0 -----------\nName          Stmts   Miss  Cover\n---------------------------------\ndivision.py       2      0   100%\n---------------------------------\nTOTAL             2      0   100%\n\n\n============================== 18 passed in 0.04s ==============================\n",
   "stderr": ""
 }

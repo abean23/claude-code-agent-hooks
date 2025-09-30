@@ -1,12 +1,25 @@
 {
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] PostToolUse Hook Triggered - Tool: $TOOL_NAME, File: $TOOL_FILE_PATH\" >> \"$CLAUDE_PROJECT_DIR\"/hook_log.txt; if [[ \"$TOOL_FILE_PATH\" == *\"ir.json\" ]]; then echo \"[$(date '+%Y-%m-%d %H:%M:%S')] Running IRProcessor on ir.json\" >> \"$CLAUDE_PROJECT_DIR\"/hook_log.txt; python3 \"$CLAUDE_PROJECT_DIR\"/IRProcessor.py \"$CLAUDE_PROJECT_DIR\"/ir.json division >> \"$CLAUDE_PROJECT_DIR\"/hook_log.txt 2>&1; fi",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/post_code_gen.sh",
-            "timeout": 60
+            "timeout": 90
           }
         ]
       }

@@ -1,1 +1,1 @@
-Generate a Python division function, then validate with edge cases.
+Generate a division function in division.py, use EdgeCaseAgent to analyze it, extract the JSON from the agent's response, and write it to ir.json.

@@ -6,77 +6,81 @@ def _resolve_target(target_spec):
     module, func = target_spec.split(":")
     return getattr(import_module(module), func)
 
+def isinstance_complex(value):
+    return isinstance(value, complex)
+
 def test_divide_by_zero():
     f = _resolve_target("division:divide")
     with pytest.raises(ZeroDivisionError):
-        f(10, 0)
+        f(1.0, 0.0)
 
-def test_divide_by_zero_negative():
+def test_divide_zero_by_zero():
     f = _resolve_target("division:divide")
     with pytest.raises(ZeroDivisionError):
-        f(-5, 0)
+        f(0.0, 0.0)
 
-def test_divide_by_zero_float():
+def test_divide_positive_infinity_by_zero():
     f = _resolve_target("division:divide")
     with pytest.raises(ZeroDivisionError):
-        f(3.5, 0.0)
+        f(float('inf'), 0.0)
 
-def test_type_error_string_numerator():
+def test_divide_negative_infinity_by_zero():
     f = _resolve_target("division:divide")
-    with pytest.raises(TypeError):
-        f('10', 2)
+    with pytest.raises(ZeroDivisionError):
+        f(float('-inf'), 0.0)
 
-def test_type_error_string_denominator():
+def test_divide_by_infinity():
     f = _resolve_target("division:divide")
-    with pytest.raises(TypeError):
-        f(10, '2')
+    assert abs(f(1.0, float('inf')) - 0.0) <= 1e-10
 
-def test_type_error_none_numerator():
+def test_divide_by_negative_infinity():
     f = _resolve_target("division:divide")
-    with pytest.raises(TypeError):
-        f(None, 5)
+    assert abs(f(1.0, float('-inf')) - 0.0) <= 1e-10
 
-def test_type_error_none_denominator():
+def test_divide_infinity_by_positive():
     f = _resolve_target("division:divide")
-    with pytest.raises(TypeError):
-        f(10, None)
+    assert math.isinf(f(float('inf'), 1.0))
 
-def test_infinity_numerator():
+def test_divide_negative_infinity_by_positive():
     f = _resolve_target("division:divide")
-    assert math.isinf(f(float('inf'), 2))
+    assert math.isinf(f(float('-inf'), 1.0))
 
-def test_infinity_denominator():
-    f = _resolve_target("division:divide")
-    assert f(10, float('inf')) == 0.0
-
-def test_negative_infinity_numerator():
-    f = _resolve_target("division:divide")
-    assert math.isinf(f(float('-inf'), 2))
-
-def test_nan_numerator():
-    f = _resolve_target("division:divide")
-    assert math.isnan(f(float('nan'), 2))
-
-def test_nan_denominator():
-    f = _resolve_target("division:divide")
-    assert math.isnan(f(10, float('nan')))
-
-def test_infinity_by_infinity():
+def test_divide_infinity_by_infinity():
     f = _resolve_target("division:divide")
     assert math.isnan(f(float('inf'), float('inf')))
 
-def test_positive_division():
+def test_divide_infinity_by_negative_infinity():
     f = _resolve_target("division:divide")
-    assert f(10, 2) == 5.0
+    assert math.isnan(f(float('inf'), float('-inf')))
 
-def test_negative_division():
+def test_divide_nan_by_number():
     f = _resolve_target("division:divide")
-    assert f(-10, 2) == -5.0
+    assert math.isnan(f(float('nan'), 1.0))
 
-def test_float_division():
+def test_divide_number_by_nan():
     f = _resolve_target("division:divide")
-    assert f(7.5, 2.5) == 3.0
+    assert math.isnan(f(1.0, float('nan')))
 
-def test_integer_result_from_floats():
+def test_divide_nan_by_nan():
     f = _resolve_target("division:divide")
-    assert f(10.0, 5.0) == 2.0
+    assert math.isnan(f(float('nan'), float('nan')))
+
+def test_divide_very_small_by_very_large():
+    f = _resolve_target("division:divide")
+    assert abs(f(1e-308, 1e+308) - 0.0) <= 1e-10
+
+def test_divide_very_large_by_very_small():
+    f = _resolve_target("division:divide")
+    assert math.isinf(f(1e+308, 1e-308))
+
+def test_divide_negative_by_positive():
+    f = _resolve_target("division:divide")
+    assert abs(f(-10.0, 2.0) - -5.0) <= 1e-10
+
+def test_divide_positive_by_negative():
+    f = _resolve_target("division:divide")
+    assert abs(f(10.0, -2.0) - -5.0) <= 1e-10
+
+def test_divide_negative_by_negative():
+    f = _resolve_target("division:divide")
+    assert abs(f(-10.0, -2.0) - 5.0) <= 1e-10

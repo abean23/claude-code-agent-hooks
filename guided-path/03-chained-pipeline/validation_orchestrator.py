@@ -42,7 +42,12 @@ def generate_test(idx, target, case):
         types = exp["raises"].get("types", [exp["raises"]]) if isinstance(exp["raises"], dict) else [exp["raises"]]
         body = f"with pytest.raises({types[0]}):\n        f({args_src})"
     elif "equals" in exp:
-        body = f"assert f({args_src}) == {repr(exp['equals']['value'])}"
+        expected_value = exp['equals']['value']
+        tolerance = exp['equals'].get('tolerance')
+        if tolerance is not None and tolerance > 0:
+            body = f"assert abs(f({args_src}) - {repr(expected_value)}) <= {tolerance}"
+        else:
+            body = f"assert f({args_src}) == {repr(expected_value)}"
     elif "predicate" in exp:
         pred_name = exp["predicate"]["name"]
         body = f"assert {pred_name}(f({args_src}))"
@@ -77,6 +82,9 @@ from importlib import import_module
 def _resolve_target(target_spec):
     module, func = target_spec.split(":")
     return getattr(import_module(module), func)
+
+def isinstance_complex(value):
+    return isinstance(value, complex)
 """
     ]
     tests.extend(generate_test(i, target, case) for i, case in enumerate(cases))
