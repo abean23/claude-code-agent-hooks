@@ -1,40 +1,49 @@
-# Planning Document: A Learning Journey for Claude Code Agents and Hooks
+# Planning Document: Claude Code Agents and Hooks
 
 ### Scenario Choice Justification
-I chose Scenario C because my deepest hands-on experience with Claude Code involves building custom agentic workflows. My experience has shown me the common pain points and the power of hooks to orchestrate agents, which positions me to create a practical, insightful educational resource for the developer community.
+I chose Scenario C (Agents + Hooks) because it best reflects my previous hands-on experience with Claude Code; as the sole developer working on my SaaS platform, DocuBot, I've extensively used agentic workflows and hooks. Most recently, I implemented an agent/hook combo that lends LLM validation to my git commits. This experience specifically indicated the value of using hooks to verify the work of your subagents-- subagents are remarkably powerful, but non-deterministic, so it is necessary to have solid visibility/logging/idempotency/etc. where possible.
+
+The single-module pipeline I’ve built is representative of how agents and hooks can be composed into deterministic, contract-driven, and observable systems—patterns that matter for real-world reliability.
 
 ## Documentation Strategy Outline
 
 ### 1. Success Criteria
-Success for this documentation package will be measured against its two primary goals: providing a hands-on learning experience and serving as a quick-reference guide.
-
-* As a Teaching Tool (Cookbook): The tutorial is successful if a developer new to these concepts can follow the step-by-step guide and have a working, hook-driven agent running rapidly. The ultimate measure of success is that they finish the tutorial with a clear mental model of the core workflow.
-* As a Reference Guide (Conceptual Guide): The guide is successful if a developer can use it to find a concise answer to a specific question about any of the 8 hooks or core agent patterns within ~two minutes. Success means the guide is a reliable, easy-to-navigate resource that a developer would bookmark for future use.
+This package succeeds if:
+* A developer can run a single command and see the full pipeline execute: agent → IR → tests → pytest → reports.
+* They leave with a clear mental model of how agents and hooks complement each other.
+* They can reuse the IR contract + hook structure as a template for their own projects.
 
 ### 2. Developer Needs Analysis
-The target audience is an experienced developer new to agentic workflows. They need a gentle learning curve that builds from fundamental concepts to practical application. Their primary need is to understand the "why" before the "how"-- what real-world problems do agentic workflows and hooks solve, and when should they be used?
+In order to make intelligent decisions about implementing this scenario, a developer will need to understand a few main concepts:
+* Subagents
+* Hooks and hook commands
 
 ### 3. Content Structure
-The documentation will follow a "progressive disclosure" model to guide the learner from simple to complex concepts, serving both quick-reference and deep-learning needs.
-* **Part I: The Conceptual Guide:** A comprehensive reference, including a concise table of all 8 hooks and an explanation of core agent patterns. It will lead with the "why," explaining the problems hooks and agents are designed to solve.
-* **Part II: The Cookbook Tutorial:** A hands-on "learning journey" that walks the user through one perfect, real-world example, reinforcing the concepts from Part I.
+Two main deliverables:
+1. GitHub repo with pipeline and documentation
+2. External documentation deliverable
 
 ### 4. Implementation Approach
-The implementation will focus on one perfect example to maximize clarity and depth for the learner.
-* **The Core Example:** A `PreToolUse` hook that functions as a blocking quality gate by triggering a simple, single-purpose **`ValidationAgent`** (a Python script) to act as a linter.
-* **The Learning Path:** The tutorial will begin with a simple "Hello, World" hook to build confidence, then progress to the more advanced hook-and-agent implementation.
+The implementation will focus on one robust agent-hook pipeline. The main blocks will be:
+* EdgeCaseAgent: An agent that will emit IR JSON after an edge-case analysis of generated code
+* Stop Hook + Command: A hook command that will validate the IR, attempt corrections to the IR, generate pyest tests, and execute them
+* Pytest: Arbiter role; results will be logged with human-readable exports
 
-### 5. Workflow Optimization & Extensibility
-The guide will focus on perfecting the core example. A dedicated "Next Steps" section will serve as the extensibility guide, explicitly describing (as a placeholder) how a developer could build upon this foundation with more advanced patterns, such as multi-agent orchestration.
+### 5. Workflow Optimization
+A dedicated “Future Work” section will sketch how this pipeline could grow into a more robust workflow. To give a few examples of places of improvement around the edges of this workflow:
+* Better 'matcher' configuration in settings.json to prevent unnecessary hook runs
+* IR cache, so we can reuse the last canonical IR when the target code + agent config haven't changed
+* Single orchestrator entry-point
 
 ### 6. Technical Depth Assessment
-The primary technical depth will be demonstrated in the quality and clarity of the documentation package itself. The implementation, while robust, serves as a vehicle for teaching. The true depth will be evident in the comprehensive Conceptual Guide, which will cover all hooks and agent patterns.
+Aside from a multi-step agent-hook workflow, the depth of this submission is further shown in:
+* Defense-in-depth validation (syntax, schema, semantic)
+* Deterministic guarantees (sorting, pinned deps, black formatting)
+* Observability (run manifests, checksums, human + machine reports)
+* Bounded repair (1 attempt, then fail-fast)
 
 ### 7. Code Architecture Rationale
-The code architecture will be deliberately simple to maximize clarity for the learner. The reference implementation will consist of a single agent script and a hook configuration, demonstrating the core concepts with minimal boilerplate so the focus remains on the hook's lifecycle and its interaction with the agent.
-
-### 8. Troubleshooting Guide
-The guide will include a focused troubleshooting section that anticipates learner struggles with the `PreToolUse` hook and `ValidationAgent` example. It will feature a "Common Mistakes" subsection covering matcher pattern errors, exit code handling, and debugging the agent script.
-
-### 9. Measurement Strategies
-Measurement will be framed from the learner's perspective. The documentation will include a "Documentation Testing" strategy with clear copy-paste commands and expected outputs, allowing the developer to verify at each step that their implementation is working correctly. Success is measured by the learner's ability to successfully build and trigger the blocking agentic workflow.
+The repo will be intentionally simple:
+* One agent (`EdgeCaseAgent`) and one hook (`post_code_gen.sh`) demonstrate the pattern
+* All observability artifacts (`reports/`) are written deterministically
+* Code is modularized within a single self-contained directory so learners can copy the pattern directly

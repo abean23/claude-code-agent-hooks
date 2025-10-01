@@ -1,1 +1,3 @@
-Generate a division function in division.py, use EdgeCaseAgent to analyze it, extract the JSON from the agent's response, and write it to ir.json.
+Analyze the Python function `divide(a, b)` in division.py using the EdgeCaseAgent.
+
+From the EdgeCaseAgent, extract the JSON from the response, and write it to outputs/ir.json.
