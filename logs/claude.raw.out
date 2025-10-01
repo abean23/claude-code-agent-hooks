@@ -1,9 +1,0 @@
-
-
-Done! The EdgeCaseAgent analyzed the `divide(a, b)` function in division.py:1 and identified 15 edge cases including:
-- Zero division scenarios (positive, negative, float zeros)
-- Infinity operations (divide by/with infinity)
-- NaN handling
-- Extreme values (very large/small numbers causing overflow/underflow)
-
-The JSON IR has been written to outputs/ir.json.
