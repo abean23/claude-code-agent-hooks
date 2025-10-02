@@ -72,7 +72,7 @@ pip install -r requirements.txt
 ```bash
 #Generate edge case tests for the example division function
 claude "$(cat examples/sample_prompt.txt)"
-#Open the human-readable test summary
+#Close out of Claude Code (ctrl-C), then open the human-readable test summary
 cat outputs/reports/summary.md
 # Expected output:
 # Status: PASS
