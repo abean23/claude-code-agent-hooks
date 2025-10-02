@@ -63,9 +63,17 @@ cd claude-code-agent-hooks
 
 2. Set up the environment:
 ```shell
+# Set up Python venv
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+
+# Ensure you have jq installed (system dependency, not Python)
+jq --version
+
+# If not installed:
+# macOS: `brew install jq`
+# WSL/Ubuntu/Debian: `sudo apt-get install -y jq`
 ```
 
 3. Run the example:
