@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-10-02T03:21:24.143948Z",
+  "git": {
+    "commit": "e3cf9151ae209d304a02baec2fab364629ff7c7c",
+    "branch": "main",
+    "dirty": true
+  },
+  "versions": {
+    "python": "Python 3.12.3",
+    "pytest": "7.4.4",
+    "jsonschema": "4.10.3",
+    "black": null
+  },
+  "environment": {
+    "python_executable": "/usr/bin/python3",
+    "platform": "linux"
+  },
+  "files": {
+    "ir_json": "c0412cc4d164829a3534117dcc248c6bf468e9f47ee81d500217c3bec258eee3",
+    "division_py": "7f025f276d62898017f80f83e97daa718505b6497f3509382c00ab2119a5a5f5",
+    "generated_tests_py": "a7b9368ca2137462222adfd430f115eee957c70bb242f0202485db608827962b",
+    "ir_schema_json": "34e4d1682a420851e8b4f82413da2e6d031ae440596635b8aead1d05cc4e3c49"
+  },
+  "config": {
+    "random_seed": null,
+    "model_name": "claude-sonnet-4-5-20250929"
+  },
+  "traceability": {
+    "agent_used": "EdgeCaseAgent",
+    "agent_config": "/home/austin/claude-code-agent-hooks/.claude/agents/edge_case_agent.md",
+    "prompt_summary": "Analyze code for edge cases and generate structured IR",
+    "note": "Full agent prompt available in agent_config file"
+  }
+}

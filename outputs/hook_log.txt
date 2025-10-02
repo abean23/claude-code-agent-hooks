@@ -1,0 +1,102 @@
+[2025-10-01 13:15:53] PostToolUse Hook Triggered - Tool: , File: 
+[2025-10-01 13:16:01] Stop Hook Triggered: /home/austin/claude-code-agent-hooks
+[2025-10-01 13:16:01] IR found: /home/austin/claude-code-agent-hooks/outputs/ir.json
+[2025-10-01 13:16:01] PYTHONPATH: /home/austin/claude-code-agent-hooks:
+[2025-10-01 13:16:01] Pre-validating IR JSON syntax
+✓ IR structure validated against schema
+✓ All test cases valid - no corrections needed
+[2025-10-01 13:16:01] IR JSON syntax validated successfully
+[2025-10-01 13:16:01] Running orchestrator: /home/austin/claude-code-agent-hooks/pipeline/validation_orchestrator.py
+[2025-10-01 13:16:01] Generating run manifest
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:95: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat() + "Z",
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:66: DeprecationWarning: Accessing jsonschema.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for jsonschema's version.
+  versions["jsonschema"] = jsonschema.__version__
+✓ Generated run manifest: /home/austin/claude-code-agent-hooks/outputs/reports/run.meta.json
+[2025-10-01 13:16:01] Generating test summary
+/home/austin/claude-code-agent-hooks/pipeline/summary_generator.py:65: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+✓ Generated summary: /home/austin/claude-code-agent-hooks/outputs/reports/summary.md
+[2025-10-01 13:16:01] All tests passed
+[2025-10-01 13:16:01] Pipeline complete
+[2025-10-01 20:17:48] Stop Hook Triggered: /home/austin/claude-code-agent-hooks
+[2025-10-01 20:17:48] IR found: /home/austin/claude-code-agent-hooks/outputs/ir.json
+[2025-10-01 20:17:48] PYTHONPATH: /home/austin/claude-code-agent-hooks:
+[2025-10-01 20:17:48] Pre-validating IR JSON syntax
+✓ IR structure validated against schema
+✓ All test cases valid - no corrections needed
+[2025-10-01 20:17:48] IR JSON syntax validated successfully
+[2025-10-01 20:17:48] Running orchestrator: /home/austin/claude-code-agent-hooks/pipeline/validation_orchestrator.py
+[2025-10-01 20:17:49] Generating run manifest
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:95: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat() + "Z",
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:66: DeprecationWarning: Accessing jsonschema.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for jsonschema's version.
+  versions["jsonschema"] = jsonschema.__version__
+✓ Generated run manifest: /home/austin/claude-code-agent-hooks/outputs/reports/run.meta.json
+[2025-10-01 20:17:49] Generating test summary
+/home/austin/claude-code-agent-hooks/pipeline/summary_generator.py:65: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+✓ Generated summary: /home/austin/claude-code-agent-hooks/outputs/reports/summary.md
+[2025-10-01 20:17:49] All tests passed
+[2025-10-01 20:17:49] Pipeline complete
+[2025-10-01 20:18:22] Stop Hook Triggered: /home/austin/claude-code-agent-hooks
+[2025-10-01 20:18:22] IR found: /home/austin/claude-code-agent-hooks/outputs/ir.json
+[2025-10-01 20:18:22] PYTHONPATH: /home/austin/claude-code-agent-hooks:
+[2025-10-01 20:18:22] Pre-validating IR JSON syntax
+✓ IR structure validated against schema
+✓ All test cases valid - no corrections needed
+[2025-10-01 20:18:22] IR JSON syntax validated successfully
+[2025-10-01 20:18:22] Running orchestrator: /home/austin/claude-code-agent-hooks/pipeline/validation_orchestrator.py
+[2025-10-01 20:18:22] Generating run manifest
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:95: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat() + "Z",
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:66: DeprecationWarning: Accessing jsonschema.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for jsonschema's version.
+  versions["jsonschema"] = jsonschema.__version__
+✓ Generated run manifest: /home/austin/claude-code-agent-hooks/outputs/reports/run.meta.json
+[2025-10-01 20:18:22] Generating test summary
+/home/austin/claude-code-agent-hooks/pipeline/summary_generator.py:65: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+✓ Generated summary: /home/austin/claude-code-agent-hooks/outputs/reports/summary.md
+[2025-10-01 20:18:22] All tests passed
+[2025-10-01 20:18:22] Pipeline complete
+[2025-10-01 20:19:48] Stop Hook Triggered: /home/austin/claude-code-agent-hooks
+[2025-10-01 20:19:48] IR found: /home/austin/claude-code-agent-hooks/outputs/ir.json
+[2025-10-01 20:19:48] PYTHONPATH: /home/austin/claude-code-agent-hooks:
+[2025-10-01 20:19:48] Pre-validating IR JSON syntax
+✓ IR structure validated against schema
+✓ All test cases valid - no corrections needed
+[2025-10-01 20:19:48] IR JSON syntax validated successfully
+[2025-10-01 20:19:48] Running orchestrator: /home/austin/claude-code-agent-hooks/pipeline/validation_orchestrator.py
+[2025-10-01 20:19:49] Generating run manifest
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:95: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat() + "Z",
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:66: DeprecationWarning: Accessing jsonschema.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for jsonschema's version.
+  versions["jsonschema"] = jsonschema.__version__
+✓ Generated run manifest: /home/austin/claude-code-agent-hooks/outputs/reports/run.meta.json
+[2025-10-01 20:19:49] Generating test summary
+/home/austin/claude-code-agent-hooks/pipeline/summary_generator.py:65: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+✓ Generated summary: /home/austin/claude-code-agent-hooks/outputs/reports/summary.md
+[2025-10-01 20:19:49] All tests passed
+[2025-10-01 20:19:49] Pipeline complete
+[2025-10-01 20:21:19] PostToolUse Hook Triggered - Tool: , File: 
+[2025-10-01 20:21:23] Stop Hook Triggered: /home/austin/claude-code-agent-hooks
+[2025-10-01 20:21:23] IR found: /home/austin/claude-code-agent-hooks/outputs/ir.json
+[2025-10-01 20:21:23] PYTHONPATH: /home/austin/claude-code-agent-hooks:
+[2025-10-01 20:21:23] Pre-validating IR JSON syntax
+✓ IR structure validated against schema
+✓ All test cases valid - no corrections needed
+[2025-10-01 20:21:23] IR JSON syntax validated successfully
+[2025-10-01 20:21:23] Running orchestrator: /home/austin/claude-code-agent-hooks/pipeline/validation_orchestrator.py
+[2025-10-01 20:21:24] Generating run manifest
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:95: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat() + "Z",
+/home/austin/claude-code-agent-hooks/pipeline/manifest_generator.py:66: DeprecationWarning: Accessing jsonschema.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for jsonschema's version.
+  versions["jsonschema"] = jsonschema.__version__
+✓ Generated run manifest: /home/austin/claude-code-agent-hooks/outputs/reports/run.meta.json
+[2025-10-01 20:21:24] Generating test summary
+/home/austin/claude-code-agent-hooks/pipeline/summary_generator.py:65: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+✓ Generated summary: /home/austin/claude-code-agent-hooks/outputs/reports/summary.md
+[2025-10-01 20:21:24] All tests passed
+[2025-10-01 20:21:24] Pipeline complete

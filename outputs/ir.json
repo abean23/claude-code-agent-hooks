@@ -1,0 +1,95 @@
+{
+  "target": "division:divide",
+  "cases": [
+    {
+      "id": "zero_division",
+      "call": {"args": [1, 0]},
+      "expectation": {"raises": {"types": ["ZeroDivisionError"]}}
+    },
+    {
+      "id": "zero_division_float",
+      "call": {"args": [1.5, 0.0]},
+      "expectation": {"raises": {"types": ["ZeroDivisionError"]}}
+    },
+    {
+      "id": "non_numeric_first_arg_string",
+      "call": {"args": ["5", 2]},
+      "expectation": {"raises": {"types": ["TypeError"]}}
+    },
+    {
+      "id": "non_numeric_second_arg_string",
+      "call": {"args": [10, "2"]},
+      "expectation": {"raises": {"types": ["TypeError"]}}
+    },
+    {
+      "id": "non_numeric_both_args",
+      "call": {"args": ["a", "b"]},
+      "expectation": {"raises": {"types": ["TypeError"]}}
+    },
+    {
+      "id": "none_first_arg",
+      "call": {"args": [null, 5]},
+      "expectation": {"raises": {"types": ["TypeError"]}}
+    },
+    {
+      "id": "none_second_arg",
+      "call": {"args": [10, null]},
+      "expectation": {"raises": {"types": ["TypeError"]}}
+    },
+    {
+      "id": "infinity_numerator",
+      "call": {"args": ["Infinity", 2]},
+      "expectation": {"predicate": {"name": "math.isinf"}}
+    },
+    {
+      "id": "negative_infinity_numerator",
+      "call": {"args": ["-Infinity", 2]},
+      "expectation": {"predicate": {"name": "math.isinf"}}
+    },
+    {
+      "id": "infinity_denominator",
+      "call": {"args": [10, "Infinity"]},
+      "expectation": {"equals": {"value": 0.0, "tolerance": 1e-10}}
+    },
+    {
+      "id": "nan_numerator",
+      "call": {"args": ["NaN", 2]},
+      "expectation": {"predicate": {"name": "math.isnan"}}
+    },
+    {
+      "id": "nan_denominator",
+      "call": {"args": [10, "NaN"]},
+      "expectation": {"predicate": {"name": "math.isnan"}}
+    },
+    {
+      "id": "very_large_numerator",
+      "call": {"args": [1e308, 2]},
+      "expectation": {"equals": {"value": 5e307, "tolerance": 1e297}}
+    },
+    {
+      "id": "very_small_denominator",
+      "call": {"args": [1, 1e-308]},
+      "expectation": {"equals": {"value": 1e308, "tolerance": 1e298}}
+    },
+    {
+      "id": "negative_zero_denominator",
+      "call": {"args": [5, -0.0]},
+      "expectation": {"raises": {"types": ["ZeroDivisionError"]}}
+    },
+    {
+      "id": "both_negative",
+      "call": {"args": [-10, -2]},
+      "expectation": {"equals": {"value": 5.0, "tolerance": 1e-10}}
+    },
+    {
+      "id": "negative_numerator",
+      "call": {"args": [-10, 2]},
+      "expectation": {"equals": {"value": -5.0, "tolerance": 1e-10}}
+    },
+    {
+      "id": "negative_denominator",
+      "call": {"args": [10, -2]},
+      "expectation": {"equals": {"value": -5.0, "tolerance": 1e-10}}
+    }
+  ]
+}

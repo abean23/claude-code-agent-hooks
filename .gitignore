@@ -4,6 +4,5 @@ __pycache__/
 *.pyc
 
 # Generated outputs
-outputs/
 .coverage
 .pytest_cache/
