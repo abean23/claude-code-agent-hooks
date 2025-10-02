@@ -27,6 +27,7 @@
 - main-guide.md: Merged sections 5 & 6, added correction guard implementation
 - main-guide.md: Added outcome classification with code to section 6
 - requirements.txt: Fixed missing key dependency
+- README.md: Tweaks to language, quick start guide, and dependencies
 
 
 ## Known Limitations (If Given More Time)

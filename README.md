@@ -24,7 +24,7 @@ The code examples are written in Python and Bash, but the concepts remain the sa
 * [Best Practices & Common Pitfalls](./docs/main-guide.md#5-best-practices--common-pitfalls): Best practices and common pitfalls (and how to avoid them) when working with agent-hook workflows
 ## Key Features
 **Highlights**: Multi-layer validation, bounded auto-correction, and automatic code testing
-* **Custom agent** (EdgeCaseAgent) for structured test IR generation
+* **Custom agent** (EdgeCaseAgent) for structured test IR (intermediate representation, a structured JSON format that encodes test cases) generation
 * **3 validation layers** catching syntax, schema, and semantic errors  
 * **Edge case tests** generated for the example `division.py` function
 * **Max 1 auto-repair** attempt, then fail-fast classification
@@ -91,16 +91,16 @@ cat outputs/reports/summary.md
 ## Why This Architecture?
 
 **Bounded Auto-Correction Prevents Infinite Loops**  
-One-time correction with `correction_attempted` flag ensures the system never masks real bugs with infinite IR rewrites
+One-time correction with `correction_attempted` flag ensures the system never masks real bugs with infinite IR rewrites, while still fixing malformed IR JSON on first pass.
 
 **Defense-in-Depth Validation**  
-Three validation layers (syntax → schema → semantic) catch different error types with actionable messages in output logs
+Three validation layers (syntax → schema → semantic) catch different error types with actionable messages in output logs.
 
 **Full Traceability**  
-SHA256 checksums and git state tracking in `run.meta.json` enable reproducible debugging and traceability
+SHA256 checksums and git state tracking in `run.meta.json` enable reproducible debugging and traceability.
 
-**Deterministic by Design**  
-Sorted test execution, pinned dependencies, and formatting using the `Black` library to eliminate non-deterministic noise
+**Controlled Determinism** <br />
+While agent outputs are inherently non-deterministic, we constrain all surrounding systems to be reproducible: test collection order is fixed, dependencies are pinned, and generated test code is formatted consistently with `Black`. This ensures that variation is isolated to the model outputs themselves, not the pipeline.
 
 [See full technical rationale →](./docs/main-guide.md#3-architecture-patterns)
 
