@@ -77,16 +77,16 @@ cat outputs/reports/summary.md
 ## Why This Architecture?
 
 **Bounded Auto-Correction Prevents Infinite Loops**  
-One-time correction with `correction_attempted` flag ensures the system never masks real bugs with endless IR rewrites.
+One-time correction with `correction_attempted` flag ensures the system never masks real bugs with infinite IR rewrites
 
 **Defense-in-Depth Validation**  
-Three validation layers (syntax → schema → semantic) catch different error types with clear, actionable messages.
+Three validation layers (syntax → schema → semantic) catch different error types with actionable messages in output logs
 
 **Full Traceability**  
-SHA256 checksums and git state tracking in `run.meta.json` enable reproducible debugging.
+SHA256 checksums and git state tracking in `run.meta.json` enable reproducible debugging and traceability
 
 **Deterministic by Design**  
-Sorted test execution, pinned dependencies, and Black formatting eliminate non-deterministic noise.
+Sorted test execution, pinned dependencies, and formatting using the `Black` library to eliminate non-deterministic noise
 
 [See full technical rationale →](./docs/main-guide.md#architecture-patterns)
 
