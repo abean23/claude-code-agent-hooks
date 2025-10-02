@@ -16,12 +16,12 @@ The code examples are written in Python and Bash, but the concepts remain the sa
 ## Repository Table of Contents
 ### For Evaluators
 * [Planning Document](./docs/PLANNING.md): Includes scenario justification and planning approach
-* [Optimizations & Future Work](./docs/optimizations.md): Places where, given more time, improvements can be made to the submission
+* [Optimizations & Future Work](./docs/main-guide.md#7-extending-the-pattern): Places where, given more time, improvements can be made to the submission
+* [Submission Notes](./docs/SUBMISSION_NOTES.md): Time-use breakdown and Claude transcript/conversation links
 ### Tool Use and Guides
 * [Tool Details](./docs/main-guide.md): Main technical document with feature descriptions and conceptual information about agent-hook workflows
-* [Implementation Guide](./docs/implementation-guide.md): Guide on how to adapt this pipeline to your own workflow
-* [Best Practices](./docs/main-guide.md#5-best-practices): Best practices when working with agent-hook workflows
-* [Troubleshooting](./docs/main-guide.md#6-common-pitfalls--solutions): Common issues and solutions
+* [Implementation Deep-Dive](./docs/main-guide.md#4-implementation-deep-dive): Common issues and solutions
+* [Best Practices & Common Pitfalls](./docs/main-guide.md#5-best-practices--common-pitfalls): Best practices and common pitfalls (and how to avoid them) when working with agent-hook workflows
 ## Key Features
 **Highlights**: Multi-layer validation, bounded auto-correction, and automatic code testing
 * **Custom agent** (EdgeCaseAgent) for structured test IR generation
@@ -94,7 +94,7 @@ SHA256 checksums and git state tracking in `run.meta.json` enable reproducible d
 **Deterministic by Design**  
 Sorted test execution, pinned dependencies, and formatting using the `Black` library to eliminate non-deterministic noise
 
-[See full technical rationale →](./docs/main-guide.md#architecture-patterns)
+[See full technical rationale →](./docs/main-guide.md#3-architecture-patterns)
 
 ## Additional Resources
 Some additional helpful links on Anthropic's Claude Code Agents and Hooks can be found here:

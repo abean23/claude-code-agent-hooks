@@ -153,58 +153,65 @@ flowchart TD
 
     %% STAGE 1: Agent Interaction and IR Generation
     subgraph "Stage 1: Agent-Driven Analysis"
-        A(Developer) -- "Analyze function for edge cases..." --> B[Claude Code];
-        B -- Invokes --> C(EdgeCaseAgent);
-        C -- Generates Test IR --> B;
-        B -- Writes file --> D[/ir.json/];
+        pad1((" "))
+        A(Developer) -- "Prompt: Analyze function X for edge cases..." --> B[Claude Code]
+        B -- Invokes --> C(EdgeCaseAgent)
+        C -- Generates Test IR --> B
+        B -- Writes file --> D[/ir.json/]
     end
 
     %% STAGE 2: Hook-Driven Validation & Correction
     subgraph "Stage 2: Hook-Based Validation"
-        E(Stop Hook Fires) --> F[post_code_gen.sh];
-        F --> G[1. Multi-Layer IR Validation];
-        G --> H[2. Generate & Run Pytest Tests];
-        H --> I{Tests Failed?};
-        I -- No --> J[Status: PASS / CODE_BUG];
-        I -- Yes --> K{Correction Attempted?};
-        K -- No --> L[3. Bounded Auto-Correct IR];
-        L -- Retries (1x max) --> H;
-        K -- Yes --> J;
+        pad2((" "))
+        E(Stop Hook Fires) --> F[post_code_gen.sh]
+        F --> G[1. Multi-Layer IR Validation]
+        G --> H[2. Generate & Run Pytest Tests]
+        H --> I{Tests Failed?}
+        I -- No --> J[Status: PASS / CODE_BUG]
+        I -- Yes --> K{Correction Attempted?}
+        K -- No --> L[3. Bounded Auto-Correct IR]
+        L -- Retries (1x max) --> H
+        K -- Yes --> J
     end
 
     %% STAGE 3: Observability Reporting
     subgraph "Stage 3: Observability"
-        J --> M[4. Generate Reports];
-        M --> N[/reports/summary.md/];
-        M --> O[/reports/run.meta.json/];
+        J --> M[4. Generate Reports]
+        M --> N[/reports/summary.md/]
+        M --> O[/reports/run.meta.json/]
     end
-
+    
     %% Link the Stages
-    D --> E;
-
+    D --> E
+    
     %% Apply the styles
-    class A actor;
-    class D,N,O file;
-    class B,C,F,G,H,J,L,M process;
-    class E hook;
-    class I,K decision;
+    class A actor
+    class D,N,O file
+    class B,C,F,G,H,J,L,M process
+    class E hook
+    class I,K decision
 
     %% Force all text to black
-    style A fill:#d4e6f1,stroke:#2980b9,stroke-width:2px,color:#000000;
-    style B fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style C fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style D fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
-    style E fill:#f4ecf7,stroke:#8e44ad,stroke-width:2px,color:#000000;
-    style F fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style G fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style H fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style I fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000;
-    style J fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style K fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000;
-    style L fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style M fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
-    style N fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
-    style O fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
+    style A fill:#d4e6f1,stroke:#2980b9,stroke-width:2px,color:#000000
+    style B fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style C fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style D fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000
+    style E fill:#f4ecf7,stroke:#8e44ad,stroke-width:2px,color:#000000
+    style F fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style G fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style H fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style I fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000
+    style J fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style K fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000
+    style L fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style M fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000
+    style N fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000
+    style O fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000
+
+    %% Make the padding nodes invisible
+    style pad1 fill:transparent,stroke:transparent,stroke-width:0px
+    style pad2 fill:transparent,stroke:transparent,stroke-width:0px
+
 ```
 ### Pattern 1: Agent-Driven Analysis
 Agent-driven generation is best used when deterministic code is not capable of parsing input data and returning the desired outputs, usually due to inconsistency in the input formats. In this pipeline, generating edge cases is an optimal use of a subagent like `EdgeCaseAgent`.
