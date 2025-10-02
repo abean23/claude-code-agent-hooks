@@ -14,9 +14,11 @@ This package succeeds if:
 * They can reuse the IR contract + hook structure as a template for their own projects.
 
 ### 2. Developer Needs Analysis
-In order to make intelligent decisions about implementing this scenario, a developer will need to understand a few main concepts:
-* Subagents
-* Hooks and hook commands
+A developer needs to understand:
+   * When to use agents vs deterministic code (agents for reasoning/analysis, hooks for enforcement)
+   * How to constrain agent output to prevent drift (tools, JSON schemas, validation)
+   * Why bounded correction matters (prevent infinite loops, don't mask bugs)
+   * Trade-offs between Stop vs PostToolUse hooks (reliability vs immediacy)
 
 ### 3. Content Structure
 Two main deliverables:

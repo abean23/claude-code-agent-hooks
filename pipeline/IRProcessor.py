@@ -67,14 +67,8 @@ class IRSyntaxFixer:
         Returns: (fixed_content, was_modified)
         """
         original = content
-
-        # Replace float('nan') with "NaN"
         content = re.sub(r"float\(['\"]nan['\"]\)", '"NaN"', content)
-
-        # Replace float('inf') with "Infinity"
         content = re.sub(r"float\(['\"]inf['\"]\)", '"Infinity"', content)
-
-        # Replace float('-inf') with "-Infinity"
         content = re.sub(r"float\(['\"]-inf['\"]\)", '"-Infinity"', content)
 
         return content, content != original
