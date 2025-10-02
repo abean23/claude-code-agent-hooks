@@ -512,4 +512,7 @@ This pipeline has a human-readable summary file that displays metrics at [summar
 - **Other Languages** -> swap pytest for Jest/JUnit, keep IR schema identical
 - **Other Test Types** -> extend schema for integration/performance tests
 - **CI/CD Integration** -> block merges on `CODE_BUG`, publish reports as artifacts
-- **Future Optimizations**: IR canonicalization, property-based testing, mutation demo toggle, CI gates 
+- **Future Optimizations**: IR canonicalization, property-based testing, mutation demo toggle, CI gates
+* Better 'matcher' configuration in settings.json to prevent unnecessary hook runs
+* IR cache, so we can reuse the last canonical IR when the target code + agent config haven't changed
+* Single orchestrator entry-point 

@@ -15,9 +15,9 @@ To make the most of the agent-hook workflow in this repo, you'll need `Claude Co
 The code examples are written in Python and Bash, but the concepts remain the same across any programming language.
 ## Repository Table of Contents
 ### For Evaluators
-* [Planning Document](./docs/PLANNING.md): Includes scenario justification and planning approach
+* [Planning Document](./docs/planning.md): Includes scenario justification and planning approach
 * [Optimizations & Future Work](./docs/main-guide.md#7-extending-the-pattern): Places where, given more time, improvements can be made to the submission
-* [Submission Notes](./docs/SUBMISSION_NOTES.md): Time-use breakdown and Claude transcript/conversation links
+* [Submission Notes](./docs/submission-notes.md): Time-use breakdown and Claude transcript/conversation links
 ### Tool Use and Guides
 * [Tool Details](./docs/main-guide.md): Main technical document with feature descriptions and conceptual information about agent-hook workflows
 * [Implementation Deep-Dive](./docs/main-guide.md#4-implementation-deep-dive): Common issues and solutions
