@@ -50,5 +50,6 @@ https://claude.ai/share/a2f40d22-f5fc-4010-b5be-9cde63dbfb97
 - [1 - Directory cleanup](./transcripts/2025-10-01-generate-a-division-function-in-divisionpy-use-e.txt)
 - [2 - Bash troubleshoot](./transcripts/claudecodetranscript01.txt)
 - [3 - Hard-coded paths cleanup](./transcripts/claudecodetranscript01.txt)
+- [4 - Requirements.txt fixes](./transcripts/2025-10-01-dependencies-fixes.txt)
 ## Other
 - Extensive use of Claude Code for debugging hook workflow - repetitive transcripts of 'Analyze this file, run EdgeCaseAgent, write to ir.json', see [here](./transcripts/2025-10-01-analyze-the-python-function-dividea-b-in-divi.txt) for an example.
