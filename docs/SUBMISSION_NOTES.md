@@ -18,7 +18,6 @@
 
 ## Work Completed After 6-Hour Mark
 
-**Documentation Expansion:**
 - README.md: Simplified Mermaid diagram, polished opening sentence
 - main-guide.md: Mermaid diagram
 - PLANNING.md: Enhanced section 2 (Developer Needs Analysis)
@@ -27,16 +26,16 @@
 - main-guide.md: Added complete hook orchestration code to section 4.3
 - main-guide.md: Merged sections 5 & 6, added correction guard implementation
 - main-guide.md: Added outcome classification with code to section 6
+- requirements.txt: Fixed missing key dependency
+
 
 ## Known Limitations (If Given More Time)
-
-- Section 4.4: Would expand observability system with usage examples
-- Section 5: Would expand thin pitfalls with full code examples
 - Section 7: Would add concrete extension examples (Jest/JUnit patterns)
 - Would add dedicated troubleshooting guide with error messages
 - More context-agnostic code samples that a user could simply drop directly into their flows
-
-
+- Multi-language IR execution; currently the parser only supports Python
+- Visualization dashboard for test result info
+- asciinema CLI recording to show flow in work
 
 # Claude Usage
 ## Claude.AI Links

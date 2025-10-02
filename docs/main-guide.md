@@ -153,7 +153,6 @@ flowchart TD
 
     %% STAGE 1: Agent Interaction and IR Generation
     subgraph "Stage 1: Agent-Driven Analysis"
-        pad1((" "))
         A(Developer) -- "Prompt: Analyze function X for edge cases..." --> B[Claude Code]
         B -- Invokes --> C(EdgeCaseAgent)
         C -- Generates Test IR --> B
@@ -162,7 +161,6 @@ flowchart TD
 
     %% STAGE 2: Hook-Driven Validation & Correction
     subgraph "Stage 2: Hook-Based Validation"
-        pad2((" "))
         E(Stop Hook Fires) --> F[post_code_gen.sh]
         F --> G[1. Multi-Layer IR Validation]
         G --> H[2. Generate & Run Pytest Tests]
