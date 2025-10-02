@@ -188,6 +188,23 @@ flowchart TD
     class B,C,F,G,H,J,L,M process;
     class E hook;
     class I,K decision;
+
+    %% Force all text to black
+    style A fill:#d4e6f1,stroke:#2980b9,stroke-width:2px,color:#000000;
+    style B fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style C fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style D fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
+    style E fill:#f4ecf7,stroke:#8e44ad,stroke-width:2px,color:#000000;
+    style F fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style G fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style H fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style I fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000;
+    style J fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style K fill:#fdebd0,stroke:#e67e22,stroke-width:2px,color:#000000;
+    style L fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style M fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style N fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
+    style O fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
 ```
 ### Pattern 1: Agent-Driven Analysis
 Agent-driven generation is best used when deterministic code is not capable of parsing input data and returning the desired outputs, usually due to inconsistency in the input formats. In this pipeline, generating edge cases is an optimal use of a subagent like `EdgeCaseAgent`.
@@ -362,9 +379,49 @@ fi
 * Reports are written to (`pytest.json`, `summary.md`, `run.meta.json`)
 
 ### 4.4 Observability System
-- **run.meta.json** -> environment, versions, file hashes, traceability.
-- **summary.md** -> pass/fail status with top failures.
-- **pytest.json** -> machine-readable results.
+- **run.meta.json**: this is where the traceability features of the pipeline are found. Includes Git hashes, version information, and a summary of the prompt used for the given Hook event. Excerpt:
+```json
+  "timestamp": "2025-10-02T03:21:24.143948Z",
+  "git": {
+    "commit": "e3cf9151ae209d304a02baec2fab364629ff7c7c",
+    "branch": "main",
+    "dirty": true
+  },
+  "versions": {
+    "python": "Python 3.12.3",
+    "pytest": "7.4.4",
+    "jsonschema": "4.10.3",
+    "black": null
+  },
+  "traceability": {
+    "agent_used": "EdgeCaseAgent",
+    "agent_config": "/home/austin/claude-code-agent-hooks/.claude/agents/edge_case_agent.md",
+    "prompt_summary": "Analyze code for edge cases and generate structured IR",
+    "note": "Full agent prompt available in agent_config file"
+  }
+```
+- **summary.md**: Human-readable summary of the testing results.
+```markdown
+# Test Summary Report
+
+**Generated**: 2025-10-02 03:21:24 UTC
+**Status**: PASS
+
+## Results
+- **Total**: 18 tests
+- **Passed**: 18 ✓
+- **Failed**: 0 ✗
+- **Pass Rate**: 100.0%
+
+## Diagnosis
+✓ All tests passed - code meets IR specifications
+
+---
+*Full details in pytest.json*
+
+```
+
+- **pytest.json**: Machine-readable summary of the testing results in JSON. Contains test id and pass status for each test run.
 
 
 ## 5. Best Practices & Common Pitfalls
@@ -384,20 +441,18 @@ elif [ "$failed" -gt 0 ]; then
 fi
 ```
 - **Masking Real Bugs**: <br />
-Semantic validation via comparing actual code outputs to the generated test cases ensures IR can’t “lie” about reality.
+Semantic validation prevents the IR from “papering over” problems in the underlying code. Even if the IR claims a function should return a certain value, the pipeline always executes the real function and compares results, ensuring that defects in the implementation are surfaced as CODE_BUG rather than hidden by faulty expectations.
 - **PostToolUse Unreliability**: <br />
 In Claude Code's current iteration (`2.0.2` at the time of writing), `PostToolUse` hooks can fire intermittently. This was solved in this repo by using a Stop hook instead.  
 - **Agent Context Overload**:<br />
-Improperly scoped agent prompts can lead to dilution of your context. In `EdgeCaseAgent`'s case, asking it to generate edge cases without specifying a file can lead to unexpected results. It's imperative to tightly scope agents when asking them to run tasks: 
+Improperly scoped agent prompts can lead to dilution of Claude Code's context. In `EdgeCaseAgent`'s case, asking it to generate edge cases without specifying a file can lead to unexpected results. It's imperative to tightly scope agents when asking them to run tasks: 
 ```
 Analyze the Python function divide() in division.py using the EdgeCaseAgent.
 From the EdgeCaseAgent, extract the JSON from the response, and write it to outputs/ir.json.
 ```
-- **Non-Deterministic Test Runs**:<br />
-Fixed by sorted IDs + pinned deps.
 - **Claude Code not writing IR to file**: <br />This usually happens in longer conversations with Claude. Simply prompt Claude to write the IR output from EdgeCaseAgent to your ir file again `"Write the IR output from EdgeCaseAgent is located in ir.json. Read the file after to verify the write was successful."`  
 
-## 7. Measuring Success
+## 6. Measuring Success
 
 **Outcomes:**<br />
 Four outcomes are possible at the end of the workflow, diagnosed in [summary_generator.py](../pipeline/summary_generator.py):
@@ -419,8 +474,8 @@ if failed == 0: # No failed tests
             status = "CODE_BUG"
 ```
 
-**Metrics:**  
-Metrics are most easily found in [summary.md](../outputs/reports/summary.md):
+**Metrics:**
+This pipeline has a human-readable summary file that displays metrics at [summary.md](../outputs/reports/summary.md).
 ```md
 
 # Test Summary Report
@@ -441,7 +496,13 @@ Metrics are most easily found in [summary.md](../outputs/reports/summary.md):
 
 ```
 
-## 8. Extending the Pattern
+**Benchmarks**:
+* Basic coverage: 8-12 cases (zero, NaN, infinity, basic types)
+* Good coverage: 15-20 cases (adds boundary values, overflow/underflow)
+* Comprehensive coverage: 25+ cases (includes combined conditions, edge interactions)
+
+
+## 7. Extending the Pattern
 
 - **Other Languages** -> swap pytest for Jest/JUnit, keep IR schema identical
 - **Other Test Types** -> extend schema for integration/performance tests

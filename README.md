@@ -46,6 +46,12 @@ flowchart TD
     class B process;
     class C hook;
     class D artifact;
+
+    %% Force all text to black
+    style A fill:#d4e6f1,stroke:#2980b9,stroke-width:2px,color:#000000;
+    style B fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px,color:#000000;
+    style C fill:#f4ecf7,stroke:#8e44ad,stroke-width:2px,color:#000000;
+    style D fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000000;
 ```
 
 ## Quick Start
@@ -65,7 +71,7 @@ pip install -r requirements.txt
 3. Run the example:
 ```bash
 #Generate edge case tests for the example division function
-cat examples/sample_prompt.txt | claude
+claude "$(cat examples/sample_prompt.txt)"
 #Open the human-readable test summary
 cat outputs/reports/summary.md
 # Expected output:
